@@ -1,0 +1,46 @@
+
+{% extends "blog/base.html" %}
+
+{% block content %}
+	
+		<article class="media content-section">
+			
+		  <div class="media-body">
+		    <div class="article-metadata">
+		      <a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>
+		      <small class="text-muted">{{ object.date|date:"F d, Y" }}</small>
+		      {% if object.author == user %}
+		      	<div>
+		      		<a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %} "> update </a>
+		      		<a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %} "> delete </a>
+		      	</div>
+		      {% endif %}
+		    </div>
+		    <h2 class="article-title">{{ object.title }}</h2>
+		    <p class="article-content">{{ object.content }}</p>
+		    {% if object.author == user %}
+		      	<div>
+		      		<p class="article-content">OTHER DETAILS </p>
+				    <p class="article-content">This project was assigned under LAP mini-projects task.</p>
+				    <p class="article-content">Deadline for version 1 : 9th Nov.</p>
+				    <a class="btn btn-outline-info mb-4" > Create MoM's </a>
+				    <a class="btn btn-outline-info mb-4" > Set new Deadline </a>
+				    
+		      	</div>
+		      {% endif %}
+
+		    <!--
+		    
+		    <p> check 1sentiment :  </p>
+			<p id="senti"> with js : </p>
+		    <script type="text/javascript">
+		    	var txt =  string(object.content)   ;	
+		    	document.getElementById("check1").innerHTML = "checked";
+		    	document.getElementById("senti").innerHTML = string(object.content) ;
+		    </script>
+		-->
+		      </div>
+		</article>
+	
+
+{% endblock content %}
