@@ -56,7 +56,7 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
 	model = Post
-	fields = ['title', 'content']
+	fields = ['title','coPI','member1', 'member2','member3','member4','member5', 'content']
 
 	def form_valid(self, form):
 		form.instance.author = self.request.user
@@ -65,16 +65,23 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 	model = Post
-	fields = ['title', 'content']
+	fields = ['title','coPI','member1', 'member2','member3','member4','member5', 'content']
 
 	def form_valid(self, form):
-		form.instance.author = self.request.user
+		#form.instance.author = self.request.user
 		return super().form_valid(form)
 
 	def test_func(self):
 		post = self.get_object()
+		validnames = []
+		validnames.append(post.coPI)
+		validnames.append(post.member1)
+		validnames.append(post.member2)
+		validnames.append(post.member3)
+		validnames.append(post.member4)
+		validnames.append(post.member5)
 
-		if self.request.user == post.author:
+		if self.request.user == post.author or self.request.user.username in validnames:
 			return True
 		return False
 
