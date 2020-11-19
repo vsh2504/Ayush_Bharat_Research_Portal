@@ -44,6 +44,12 @@
 	          	{% else %}
 
 	          {% endif %}
+
+	          {% if user.is_authenticated %}
+	          	<a class="nav-item nav-link" href=" {% url 'my-contacts'%} ">My Contacts</a>
+	          	{% else %}
+
+	          {% endif %}
 	          
 	        </div>
 	        <!-- Navbar Right Side -->

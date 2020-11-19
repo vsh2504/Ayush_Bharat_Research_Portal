@@ -100,3 +100,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 		if self.request.user == post.author:
 			return True
 		return False
+
+def Contacts(request):
+	contacts_dict = { }
+	return render(request,'blog/contacts.html',context=contacts_dict)
