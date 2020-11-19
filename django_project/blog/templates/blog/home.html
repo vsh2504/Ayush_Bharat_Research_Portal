@@ -11,9 +11,32 @@
 		      <small class="text-muted">{{ post.date|date:"F d, Y" }}</small>
 		    </div>
 		    <h2><a class="article-title" href="{% url 'post-detail' post.id %} ">{{ post.title }}</a></h2>
-		    <h5 class="article-content"  >{{ post.content }}</h5>
+		    <h5> PI - {{post.PI}} </h5>
+		    {% if post.coPI %}
+		    		<h5> CoPI - {{ post.coPI }} </h5>
+		    {% endif %}
+		    
+		    <h5 class="article-content"  >Description<br>{{ post.content }}</h5>
+		    <h5> Members </h5>
+		    <ul>
+		    	{% if post.member1 %}
+		    		<li> {{ post.member1 }} </li>
+		    	{% endif %}
+		    	{% if post.member2 %}
+		    		<li> {{ post.member2 }} </li>
+		    	{% endif %}
+		    	{% if post.member3 %}
+		    		<li> {{ post.member3 }} </li>
+		    	{% endif %}
+		    	{% if post.member4 %}
+		    		<li> {{ post.member4 }} </li>
+		    	{% endif %}
+		    	{% if post.member5 %}
+		    		<li> {{ post.member5 }} </li>
+		    	{% endif %}
+		    </ul>
 		 	
-		     </div>
+		   </div>
 		</article>
 	{% endfor %}
 

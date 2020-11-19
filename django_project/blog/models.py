@@ -8,13 +8,17 @@ from django.urls import reverse
 class Post(models.Model):
 	title = models.CharField(max_length=100)
 	content = models.TextField()
+	PI = models.CharField(max_length=100, blank=True, default='')
 	coPI = models.CharField(max_length=100, blank=True, default='')
 	member1 = models.CharField(max_length=100, blank=True, default='')
 	member2 = models.CharField(max_length=100, blank=True, default='')
 	member3 = models.CharField(max_length=100, blank=True, default='')
 	member4 = models.CharField(max_length=100, blank=True, default='')
 	member5 = models.CharField(max_length=100, blank=True, default='')
-	
+	funding = models.DecimalField(decimal_places=2,max_digits=15)
+	sanctionedAmount = models.DecimalField(decimal_places=2,max_digits=15)
+	startDate = models.DateField() 
+	endDate = models.DateField()
 	#date = models.DateTimeField(auto_now_add=True)
 	date = models.DateTimeField(default=timezone.now)
 	author = models.ForeignKey(User, on_delete=models.CASCADE)

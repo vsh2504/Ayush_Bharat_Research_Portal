@@ -56,7 +56,12 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
 	model = Post
-	fields = ['title','coPI','member1', 'member2','member3','member4','member5', 'content']
+	fields = ['title','PI','coPI','member1', 'member2','member3','member4','member5', 'content','funding','sanctionedAmount','startDate','endDate']
+
+	# def get_form(self):
+	# 	form = super(PostCreateView, self).get_form(form_class)
+	# 	form.fields['startDate'].widget.attrs.update({'class': 'datepicker'})
+	# 	return form
 
 	def form_valid(self, form):
 		form.instance.author = self.request.user
