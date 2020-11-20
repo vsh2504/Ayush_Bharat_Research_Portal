@@ -51,9 +51,15 @@
 				    	{% endif %}
 				    </ul>
 		 			<br>
-				    <a class="btn btn-outline-info mb-4" > Create MoM's </a>
+				    <a class="btn btn-outline-info mb-4" href="{% url 'upload_file' %}"> Create MoM's or Add other Files </a>
 				    <a class="btn btn-outline-info mb-4" > Set new Deadline </a>
-				    
+
+				    <h5> Project's Files </h5>
+				    {% for file in file_obj_list %}
+				    	<h6> <a href='{{ MEDIA_URL }}/{{ file.document }}'>{{ file.file_title }}</a></h6>
+				    	<p> Description: {{ file.description }} </p>
+				    	<p> {{ file.name }} </p>
+				    {% endfor %}
 		      	</div>
 		      {% endif %}
 
