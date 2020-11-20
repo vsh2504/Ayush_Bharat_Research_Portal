@@ -24,3 +24,8 @@ class ProfileUpdateForm(forms.ModelForm):
 	class Meta:
 		model = Profile
 		fields = ['contacts_list']
+
+class ContactsUpdateForm(forms.ModelForm):
+	class Meta:
+		model = Profile
+		fields = ['contacts_list']

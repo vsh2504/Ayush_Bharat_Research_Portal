@@ -1,0 +1,18 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+	<h1 class="mb-3"> List of Contacts saved by {{ user_info.username }}  </h1>
+	<div class="content-section">
+	  <div class="media">
+	  <div>
+	    {% for item in user_contacts_list %}
+	    	<p>{{ item }}</p>
+	    {% endfor %}
+	  </div>
+	  </div>  
+	</div>
+	<div>
+  		<a class="btn btn-primary btn-sm mt-1 mb-1" href="{% url 'contacts-update' %} "> Update Contacts </a>
+	</div>
+{% endblock content %}
+

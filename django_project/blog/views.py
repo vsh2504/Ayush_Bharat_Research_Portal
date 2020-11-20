@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post 
+from users.models import Profile
 
 def home(request):
 	#return HttpResponse('<h1>Blog Home</h1>')
@@ -101,6 +102,3 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 			return True
 		return False
 
-def Contacts(request):
-	contacts_dict = { }
-	return render(request,'blog/contacts.html',context=contacts_dict)
