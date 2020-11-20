@@ -34,3 +34,9 @@ class Post(models.Model):
 		return reverse('post-detail', kwargs={'pk':self.pk})
 
 	
+class Files(models.Model):
+	file_title = models.CharField(max_length=100)
+	description = models.CharField(max_length=255, blank=True)
+	document = models.FileField(upload_to='documents/')
+	project = models.ForeignKey(Post,related_name='files',on_delete=models.CASCADE)
+	uploaded_at = models.DateTimeField(auto_now_add=True)

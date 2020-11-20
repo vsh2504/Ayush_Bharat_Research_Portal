@@ -3,8 +3,9 @@ from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post 
+from .models import Post,Files 
 from users.models import Profile
+from .forms import DocumentForm
 
 def home(request):
 	#return HttpResponse('<h1>Blog Home</h1>')
@@ -52,7 +53,13 @@ class MyPostListView(LoginRequiredMixin, ListView):
 
 class PostDetailView(DetailView):
 	model = Post
-	
+
+	def get_context_data(self, **kwargs):
+		# Call the base implementation first to get a context
+		context = super().get_context_data(**kwargs)
+		# Add in a QuerySet of all the books
+		context['file_obj_list'] = Files.objects.filter(project=context["post"])
+		return context
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
@@ -80,6 +87,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 	def test_func(self):
 		post = self.get_object()
 		validnames = []
+		validnames.append(post.PI)
 		validnames.append(post.coPI)
 		validnames.append(post.member1)
 		validnames.append(post.member2)
@@ -102,3 +110,14 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 			return True
 		return False
 
+def model_form_upload(request):
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('blog-home')
+    else:
+        form = DocumentForm()
+    return render(request, 'blog/model_form_upload.html', {
+        'form': form
+    })

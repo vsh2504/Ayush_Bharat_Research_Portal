@@ -16,6 +16,6 @@ urlpatterns = [
    
     path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
-    
+    path('project/upload_file/',views.model_form_upload,name='upload_file')
     #path('about/',views.about, name='blog-about'),
 ]
